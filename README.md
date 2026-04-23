@@ -55,3 +55,33 @@ This platform supports:
 
 ## 📁 Project Structure (Planned)
 
+- /frontend
+- /backend
+- /database
+- /storage
+- /ide-sandbox
+- /docs
+
+---
+
+## 🧠 Roadmap (High‑Level)
+
+See `ROADMAP.md` for the full timeline.
+
+---
+
+## 🛠 Installation (Coming Soon)
+
+Instructions will be added once the backend and frontend scaffolding are complete.
+
+---
+
+## 🤝 Contributing
+
+Contributions will be welcome once the initial prototype is ready.
+
+---
+
+## 📄 License
+
+To be determined.
