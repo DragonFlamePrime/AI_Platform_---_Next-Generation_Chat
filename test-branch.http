@@ -1,0 +1,32 @@
+### Create a conversation
+POST http://localhost:3000/api/conversations
+Content-Type: application/json
+
+{
+  "title": "Branch Test"
+}
+
+### Add messages by chatting
+POST http://localhost:3000/api/chat
+Content-Type: application/json
+
+{
+  "conversationId": "<PUT-CONVO-ID>",
+  "message": "Hello world!",
+  "attachments": []
+}
+
+### List messages
+GET http://localhost:3000/api/conversations/<PUT-CONVO-ID>
+
+### Branch at a message
+POST http://localhost:3000/api/branches
+Content-Type: application/json
+
+{
+  "conversationId": "<PUT-CONVO-ID>",
+  "messageId": "<PUT-MESSAGE-ID>"
+}
+
+### Load branched conversation
+GET http://localhost:3000/api/conversations/<PUT-NEW-ID>

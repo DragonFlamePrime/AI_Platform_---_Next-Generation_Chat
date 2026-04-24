@@ -22,6 +22,9 @@ app.use("/api/chat", chatRoutes);
 import attachmentRoutes from "./routes/attachments.js";
 app.use("/api/attachments", attachmentRoutes);
 
+import branchRoutes from "./routes/branches.js";
+app.use("/api/branches", branchRoutes);
+
 // 5. Static file serving
 app.use("/attachments", express.static("storage/attachments"));
 
