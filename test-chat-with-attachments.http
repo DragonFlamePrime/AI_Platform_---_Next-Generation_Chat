@@ -1,0 +1,16 @@
+POST http://localhost:3000/api/chat
+Content-Type: application/json
+
+{
+  "message": "Here is the file!",
+  "conversationId": "conv-001",
+  "attachments": [
+    {
+      "id": "39a3db5e421d22c5",
+      "filename": "test.txt",
+      "storedFilename": "39a3db5e421d22c5.txt",
+      "size": 12,
+      "url": "/attachments/39a3db5e421d22c5.txt"
+    }
+  ]
+}

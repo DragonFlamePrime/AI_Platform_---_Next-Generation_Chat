@@ -1,26 +1,22 @@
-export async function handleChat(req, res) {
-  try {
-    const { message, conversationId, attachments } = req.body;
+export const handleChat = (req, res) => {
+  const { message, conversationId, attachments = [] } = req.body;
 
-    if (!message || message.trim() === "") {
-      return res.status(400).json({ error: "Message is required." });
-    }
+  // Validate attachments (full metadata)
+  const validatedAttachments = attachments.map(att => ({
+    id: att.id,
+    filename: att.filename,
+    storedFilename: att.storedFilename,
+    size: att.size,
+    url: att.url
+  }));
 
-    // Placeholder AI logic (replace with real model later)
-    const aiReply = `AI response to: "${message}"`;
+  const response = {
+    conversationId,
+    userMessage: message,
+    aiMessage: `AI response to: "${message}"`,
+    attachments: validatedAttachments,
+    timestamp: Date.now()
+  };
 
-    const response = {
-      conversationId: conversationId || "temp-id",
-      userMessage: message,
-      aiMessage: aiReply,
-      attachments: attachments || [],
-      timestamp: Date.now()
-    };
-
-    res.json(response);
-
-  } catch (err) {
-    console.error("Chat error:", err);
-    res.status(500).json({ error: "Internal server error." });
-  }
-}
+  res.json(response);
+};
