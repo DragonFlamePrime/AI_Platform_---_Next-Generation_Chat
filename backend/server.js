@@ -25,6 +25,9 @@ app.use("/api/attachments", attachmentRoutes);
 import branchRoutes from "./routes/branches.js";
 app.use("/api/branches", branchRoutes);
 
+import memoryRoutes from "./routes/memory.js";
+app.use("/api/memory", memoryRoutes);
+
 // 5. Static file serving
 app.use("/attachments", express.static("storage/attachments"));
 

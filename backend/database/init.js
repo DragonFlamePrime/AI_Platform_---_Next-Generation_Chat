@@ -22,4 +22,13 @@ export function initializeDatabase() {
       FOREIGN KEY (conversationId) REFERENCES conversations(id) ON DELETE CASCADE
     )
   `).run();
+
+  // Memory table
+  db.prepare(`
+    CREATE TABLE IF NOT EXISTS memory (
+      id TEXT PRIMARY KEY,
+      fact TEXT NOT NULL,
+      createdAt INTEGER NOT NULL
+    )
+  `).run();
 }

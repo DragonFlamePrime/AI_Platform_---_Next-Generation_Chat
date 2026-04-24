@@ -1,0 +1,13 @@
+### Add memory
+POST http://localhost:3000/api/memory
+Content-Type: application/json
+
+{
+  "fact": "Jaren lives in Alaska."
+}
+
+### List memory
+GET http://localhost:3000/api/memory
+
+### Delete memory
+DELETE http://localhost:3000/api/memory/<PUT-ID-HERE>
