@@ -1,0 +1,17 @@
+### Create conversation
+POST http://localhost:3000/api/conversations
+Content-Type: application/json
+
+{
+  "title": "My First Conversation"
+}
+
+### List conversations
+GET http://localhost:3000/api/conversations
+
+### Load conversation
+GET http://localhost:3000/api/conversations/<PUT-ID-HERE>
+
+
+### Delete conversation
+DELETE http://localhost:3000/api/conversations/e0444c0092508a14
