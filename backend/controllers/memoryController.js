@@ -40,3 +40,30 @@ export function deleteMemory(req, res) {
 
   res.json({ success: true });
 }
+
+// Update a memory
+export function updateMemory(req, res) {
+  const { id } = req.params;
+  const { fact } = req.body;
+
+  if (!fact || fact.trim().length === 0) {
+    return res.status(400).json({ error: "Fact cannot be empty." });
+  }
+
+  const existing = db.prepare(`SELECT id FROM memory WHERE id = ?`).get(id);
+  if (!existing) {
+    return res.status(404).json({ error: "Memory not found." });
+  }
+
+  db.prepare(`
+    UPDATE memory SET fact = ? WHERE id = ?
+  `).run(fact.trim(), id);
+
+  res.json({ id, fact });
+}
+
+// Delete ALL memories
+export function deleteAllMemory(req, res) {
+  db.prepare(`DELETE FROM memory`).run();
+  res.json({ message: "All memories deleted." });
+}
