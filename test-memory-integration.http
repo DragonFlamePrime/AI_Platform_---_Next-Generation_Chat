@@ -1,0 +1,27 @@
+### Create conversation
+POST http://localhost:3000/api/conversations
+Content-Type: application/json
+
+{
+  "title": "Memory Integration Test"
+}
+
+### Send memory-storing message
+POST http://localhost:3000/api/chat
+Content-Type: application/json
+
+{
+  "conversationId": "7889f32aa0151ec8",
+  "message": "My favorite color is blue.",
+  "attachments": []
+}
+
+### Ask question that requires memory
+POST http://localhost:3000/api/chat
+Content-Type: application/json
+
+{
+  "conversationId": "7889f32aa0151ec8",
+  "message": "What is my favorite color?",
+  "attachments": []
+}
