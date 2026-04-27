@@ -11,7 +11,7 @@ POST http://localhost:3000/api/chat
 Content-Type: application/json
 
 {
-  "conversationId": "7889f32aa0151ec8",
+  "conversationId": "<PUT-ID-HERE>",
   "message": "My favorite color is blue.",
   "attachments": []
 }
@@ -21,7 +21,7 @@ POST http://localhost:3000/api/chat
 Content-Type: application/json
 
 {
-  "conversationId": "7889f32aa0151ec8",
+  "conversationId": "<PUT-ID-HERE>",
   "message": "What is my favorite color?",
   "attachments": []
 }

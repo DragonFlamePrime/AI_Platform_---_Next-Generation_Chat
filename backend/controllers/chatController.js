@@ -30,26 +30,46 @@ export const handleChat = (req, res) => {
     timestamp
   );
 
-  // ---------------------------------------------------------
-  // ⭐ 2. AUTO‑MEMORY DETECTION (Step 7)
-  // ---------------------------------------------------------
-  const lower = message.toLowerCase();
+  // --- Memory Detection (Improved) ---
 
-  if (
+// 1. Split into sentences
+const sentences = message
+  .split(/(?<=[.?!])\s+/)
+  .map(s => s.trim())
+  .filter(s => s.length > 0);
+
+for (const sentence of sentences) {
+  const lower = sentence.toLowerCase();
+
+  // 2. Skip questions
+  if (sentence.endsWith("?")) continue;
+
+  // 3. Fact patterns
+  const isFact =
     lower.startsWith("i am ") ||
     lower.startsWith("my name is ") ||
     lower.startsWith("i live in ") ||
-    lower.includes(" is my favorite")
-  ) {
-    const memId = crypto.randomBytes(8).toString("hex");
-    const createdAt = Date.now();
+    lower.includes(" is my favorite");
 
-    db.prepare(`
-      INSERT INTO memory (id, fact, createdAt)
-      VALUES (?, ?, ?)
-    `).run(memId, message, createdAt);
-  }
+  if (!isFact) continue;
 
+  // 4. Duplicate detection
+  const existing = db.prepare(`
+    SELECT id FROM memory WHERE fact = ?
+  `).get(sentence);
+
+  if (existing) continue; // skip duplicates
+
+  // 5. Save memory
+  const memId = crypto.randomBytes(8).toString("hex");
+  const createdAt = Date.now();
+
+  db.prepare(`
+    INSERT INTO memory (id, fact, createdAt)
+    VALUES (?, ?, ?)
+  `).run(memId, sentence, createdAt);
+}
+  
   // ---------------------------------------------------------
   // ⭐ 3. LOAD ALL MEMORIES (Step 7)
   // ---------------------------------------------------------
