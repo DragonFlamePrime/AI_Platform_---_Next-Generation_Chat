@@ -1,7 +1,6 @@
 import Layout from "../components/Layout";
-import { useEffect, useState } from "react";
 import Card from "../components/Card";
-
+import { useEffect, useState } from "react";
 
 export default function Memory() {
   const [memories, setMemories] = useState([]);
@@ -58,146 +57,91 @@ export default function Memory() {
     loadMemories();
   };
 
- return (
-  <Layout>
-    <h1 style={{ marginBottom: "20px" }}>Facts You've Shared</h1>
+  return (
+    <Layout>
+      <h1 style={{ marginBottom: "20px" }}>Facts You've Shared</h1>
 
-    <Card>
-      <div style={{ display: "flex", gap: "10px" }}>
-        <input
-          value={newFact}
-          onChange={(e) => setNewFact(e.target.value)}
-          placeholder="Add a fact..."
-          style={{
-            flex: 1,
-            padding: "10px",
-            borderRadius: "8px",
-            border: "1px solid #ccc"
-          }}
-        />
-        <button
-          onClick={addMemory}
-          style={{
-            padding: "10px 16px",
-            borderRadius: "8px",
-            border: "none",
-            background: "#0067c0",
-            color: "white",
-            cursor: "pointer"
-          }}
-        >
-          Add
+      <Card>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <input
+            value={newFact}
+            onChange={(e) => setNewFact(e.target.value)}
+            placeholder="Add a fact..."
+          />
+          <button className="btn-primary" onClick={addMemory}>
+            Add
+          </button>
+        </div>
+      </Card>
+
+      <Card>
+        <button className="btn-danger" onClick={deleteAll}>
+          Delete All Memory
         </button>
-      </div>
-    </Card>
+      </Card>
 
-    <Card>
-      <button
-        onClick={deleteAll}
-        style={{
-          padding: "10px 16px",
-          borderRadius: "8px",
-          border: "none",
-          background: "#d9534f",
-          color: "white",
-          cursor: "pointer"
-        }}
-      >
-        Delete All Memory
-      </button>
-    </Card>
-
-    <Card>
-      <ul style={{ listStyle: "none", padding: 0 }}>
-        {memories.map((m) => (
-          <li
-            key={m.id}
-            style={{
-              padding: "12px",
-              borderBottom: "1px solid #eee",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center"
-            }}
-          >
-            {editingId === m.id ? (
-              <>
-                <input
-                  value={editingText}
-                  onChange={(e) => setEditingText(e.target.value)}
-                  style={{
-                    flex: 1,
-                    padding: "8px",
-                    borderRadius: "8px",
-                    border: "1px solid #ccc",
-                    marginRight: "10px"
-                  }}
-                />
-                <button
-                  onClick={() => updateMemory(m.id)}
-                  style={{
-                    padding: "8px 12px",
-                    borderRadius: "8px",
-                    background: "#28a745",
-                    color: "white",
-                    border: "none",
-                    marginRight: "6px"
-                  }}
-                >
-                  Save
-                </button>
-                <button
-                  onClick={() => setEditingId(null)}
-                  style={{
-                    padding: "8px 12px",
-                    borderRadius: "8px",
-                    background: "#6c757d",
-                    color: "white",
-                    border: "none"
-                  }}
-                >
-                  Cancel
-                </button>
-              </>
-            ) : (
-              <>
-                <span>{m.fact}</span>
-                <div style={{ display: "flex", gap: "8px" }}>
-                  <button
-                    onClick={() => {
-                      setEditingId(m.id);
-                      setEditingText(m.fact);
-                    }}
+      <Card>
+        <ul style={{ listStyle: "none", padding: 0 }}>
+          {memories.map((m) => (
+            <li
+              key={m.id}
+              style={{
+                padding: "12px",
+                borderBottom: "1px solid #eee",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center"
+              }}
+            >
+              {editingId === m.id ? (
+                <>
+                  <input
+                    value={editingText}
+                    onChange={(e) => setEditingText(e.target.value)}
                     style={{
-                      padding: "8px 12px",
-                      borderRadius: "8px",
-                      background: "#0067c0",
-                      color: "white",
-                      border: "none"
+                      flex: 1,
+                      marginRight: "10px"
                     }}
+                  />
+                  <button
+                    className="btn-primary"
+                    onClick={() => updateMemory(m.id)}
                   >
-                    Edit
+                    Save
                   </button>
                   <button
-                    onClick={() => deleteMemory(m.id)}
-                    style={{
-                      padding: "8px 12px",
-                      borderRadius: "8px",
-                      background: "#d9534f",
-                      color: "white",
-                      border: "none"
-                    }}
+                    className="btn-neutral"
+                    onClick={() => setEditingId(null)}
                   >
-                    Delete
+                    Cancel
                   </button>
-                </div>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
-    </Card>
-  </Layout>
-);
-
+                </>
+              ) : (
+                <>
+                  <span>{m.fact}</span>
+                  <div style={{ display: "flex", gap: "8px" }}>
+                    <button
+                      className="btn-primary"
+                      onClick={() => {
+                        setEditingId(m.id);
+                        setEditingText(m.fact);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn-danger"
+                      onClick={() => deleteMemory(m.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      </Card>
+    </Layout>
+  );
 }

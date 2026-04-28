@@ -1,0 +1,62 @@
+/* Copilot-style global polish */
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+/* Clean headings */
+h1, h2, h3 {
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+/* Inputs */
+input {
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #0067c0;
+  box-shadow: 0 0 0 2px rgba(0, 103, 192, 0.2);
+}
+
+/* Buttons */
+button {
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Primary button */
+.btn-primary {
+  background: #0067c0;
+  color: white;
+  border: none;
+}
+
+/* Danger button */
+.btn-danger {
+  background: #d9534f;
+  color: white;
+  border: none;
+}
+
+/* Neutral button */
+.btn-neutral {
+  background: #6c757d;
+  color: white;
+  border: none;
+}
