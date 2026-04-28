@@ -10,7 +10,8 @@ export default function Layout({ children }) {
           marginLeft: "260px",
           padding: "40px",
           width: "100%",
-          boxSizing: "border-box"
+          boxSizing: "border-box",
+          transition: "background 0.25s ease, color 0.25s ease"
         }}
       >
         {children}

@@ -1,13 +1,65 @@
-/* Copilot-style global polish */
+/* ============================
+   Copilot Global Theme System
+   ============================ */
+
+/* Light mode variables */
+:root {
+  --bg: #f5f5f5;
+  --text: #222;
+
+  --card-bg: #ffffff;
+  --card-border: #e5e5e5;
+
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #ddd;
+  --sidebar-text: #222;
+
+  --input-bg: #ffffff;
+  --input-border: #ccc;
+
+  --button-primary: #0067c0;
+  --button-danger: #d9534f;
+  --button-neutral: #6c757d;
+
+  --shadow: rgba(0, 0, 0, 0.06);
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1e1e1e;
+    --text: #e6e6e6;
+
+    --card-bg: #2a2a2a;
+    --card-border: #3a3a3a;
+
+    --sidebar-bg: #2f2f2f;       /* higher contrast */
+    --sidebar-border: #4a4a4a;
+    --sidebar-text: #f5f5f5;     /* bright text for visibility */
+
+    --input-bg: #2a2a2a;
+    --input-border: #555;
+
+    --button-primary: #3ea0ff;
+    --button-danger: #ff6b6b;
+    --button-neutral: #888;
+
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ============================
+   Base Styles
+   ============================ */
 
 body {
   margin: 0;
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: #f5f5f5;
-  color: #222;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
-/* Headings */
 h1, h2, h3 {
   font-weight: 600;
   margin: 0 0 16px 0;
@@ -17,14 +69,16 @@ h1, h2, h3 {
 input {
   font-size: 15px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
   padding: 10px;
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  color: var(--text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.25s ease;
 }
 
 input:focus {
-  border-color: #0067c0;
+  border-color: var(--button-primary);
   box-shadow: 0 0 0 2px rgba(0, 103, 192, 0.25);
 }
 
@@ -40,55 +94,51 @@ button {
   gap: 6px;
 }
 
-/* Hover */
 button:hover {
   opacity: 0.92;
 }
 
-/* Pressed */
 button:active {
   transform: scale(0.97);
 }
 
-/* Primary */
 .btn-primary {
-  background: #0067c0;
+  background: var(--button-primary);
   color: white;
   border: none;
 }
 
-/* Danger */
 .btn-danger {
-  background: #d9534f;
+  background: var(--button-danger);
   color: white;
   border: none;
 }
 
-/* Neutral */
 .btn-neutral {
-  background: #6c757d;
+  background: var(--button-neutral);
   color: white;
   border: none;
 }
 
-/* Card hover lift */
+/* Cards */
 .card-hover {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.25s ease, border-color 0.25s ease;
 }
 
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 14px var(--shadow);
 }
 
-/* Sidebar link hover */
+/* Sidebar links */
 .sidebar-link {
   transition: color 0.15s ease, background 0.15s ease;
   padding: 6px 8px;
   border-radius: 6px;
+  color: var(--sidebar-text);
 }
 
 .sidebar-link:hover {
-  background: #f0f0f0;
-  color: #0067c0;
+  background: rgba(0, 103, 192, 0.1);
+  color: var(--button-primary);
 }

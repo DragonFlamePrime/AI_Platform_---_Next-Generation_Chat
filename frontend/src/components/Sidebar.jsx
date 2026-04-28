@@ -7,13 +7,16 @@ export default function Sidebar() {
       style={{
         width: "260px",
         height: "100vh",
-        borderRight: "1px solid #ddd",
+        borderRight: "1px solid var(--sidebar-border)",
         padding: "24px",
-        background: "white",
+        background: "var(--sidebar-bg)",
+        color: "var(--sidebar-text)",
         position: "fixed",
         left: 0,
         top: 0,
-        boxSizing: "border-box"
+        boxSizing: "border-box",
+        transition: "background 0.25s ease, border-color 0.25s ease, color 0.25s ease",
+        boxShadow: "2px 0 6px rgba(0,0,0,0.25)"
       }}
     >
       <h2 style={{ marginBottom: "24px", fontWeight: 600 }}>Settings</h2>
@@ -24,7 +27,7 @@ export default function Sidebar() {
           className="sidebar-link"
           style={{
             textDecoration: "none",
-            color: "#333",
+            color: "var(--sidebar-text)",
             fontSize: "15px",
             display: "flex",
             alignItems: "center",
@@ -40,7 +43,7 @@ export default function Sidebar() {
           className="sidebar-link"
           style={{
             textDecoration: "none",
-            color: "#333",
+            color: "var(--sidebar-text)",
             fontSize: "15px",
             display: "flex",
             alignItems: "center",
