@@ -1,3 +1,4 @@
+import Layout from "../components/Layout";
 import { useEffect, useState } from "react";
 
 export default function Memory() {
@@ -56,7 +57,7 @@ export default function Memory() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <Layout>
       <h1>Facts You've Shared</h1>
 
       <div style={{ marginBottom: "20px" }}>
@@ -111,6 +112,6 @@ export default function Memory() {
           </li>
         ))}
       </ul>
-    </div>
+    </Layout>
   );
 }
