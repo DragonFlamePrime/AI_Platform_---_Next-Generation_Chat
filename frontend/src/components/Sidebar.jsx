@@ -21,6 +21,7 @@ export default function Sidebar() {
       <nav style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
         <Link
           to="/"
+          className="sidebar-link"
           style={{
             textDecoration: "none",
             color: "#333",
@@ -36,6 +37,7 @@ export default function Sidebar() {
 
         <Link
           to="/memory"
+          className="sidebar-link"
           style={{
             textDecoration: "none",
             color: "#333",

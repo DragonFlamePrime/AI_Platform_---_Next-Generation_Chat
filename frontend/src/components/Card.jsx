@@ -1,6 +1,7 @@
 export default function Card({ children }) {
   return (
     <div
+      className="card-hover"
       style={{
         background: "white",
         borderRadius: "12px",

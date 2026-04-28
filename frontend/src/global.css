@@ -7,7 +7,7 @@ body {
   color: #222;
 }
 
-/* Clean headings */
+/* Headings */
 h1, h2, h3 {
   font-weight: 600;
   margin: 0 0 16px 0;
@@ -20,11 +20,12 @@ input {
   border: 1px solid #ccc;
   padding: 10px;
   outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 input:focus {
   border-color: #0067c0;
-  box-shadow: 0 0 0 2px rgba(0, 103, 192, 0.2);
+  box-shadow: 0 0 0 2px rgba(0, 103, 192, 0.25);
 }
 
 /* Buttons */
@@ -33,30 +34,61 @@ button {
   border-radius: 8px;
   padding: 10px 16px;
   cursor: pointer;
-  transition: background 0.15s ease, opacity 0.15s ease;
+  transition: background 0.15s ease, opacity 0.15s ease, transform 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
+/* Hover */
 button:hover {
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
-/* Primary button */
+/* Pressed */
+button:active {
+  transform: scale(0.97);
+}
+
+/* Primary */
 .btn-primary {
   background: #0067c0;
   color: white;
   border: none;
 }
 
-/* Danger button */
+/* Danger */
 .btn-danger {
   background: #d9534f;
   color: white;
   border: none;
 }
 
-/* Neutral button */
+/* Neutral */
 .btn-neutral {
   background: #6c757d;
   color: white;
   border: none;
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+/* Sidebar link hover */
+.sidebar-link {
+  transition: color 0.15s ease, background 0.15s ease;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.sidebar-link:hover {
+  background: #f0f0f0;
+  color: #0067c0;
 }
