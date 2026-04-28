@@ -1,5 +1,7 @@
 import Layout from "../components/Layout";
 import { useEffect, useState } from "react";
+import Card from "../components/Card";
+
 
 export default function Memory() {
   const [memories, setMemories] = useState([]);
@@ -56,62 +58,146 @@ export default function Memory() {
     loadMemories();
   };
 
-  return (
-    <Layout>
-      <h1>Facts You've Shared</h1>
+ return (
+  <Layout>
+    <h1 style={{ marginBottom: "20px" }}>Facts You've Shared</h1>
 
-      <div style={{ marginBottom: "20px" }}>
+    <Card>
+      <div style={{ display: "flex", gap: "10px" }}>
         <input
           value={newFact}
           onChange={(e) => setNewFact(e.target.value)}
           placeholder="Add a fact..."
-          style={{ width: "300px", padding: "8px" }}
+          style={{
+            flex: 1,
+            padding: "10px",
+            borderRadius: "8px",
+            border: "1px solid #ccc"
+          }}
         />
-        <button onClick={addMemory} style={{ marginLeft: "10px" }}>
+        <button
+          onClick={addMemory}
+          style={{
+            padding: "10px 16px",
+            borderRadius: "8px",
+            border: "none",
+            background: "#0067c0",
+            color: "white",
+            cursor: "pointer"
+          }}
+        >
           Add
         </button>
       </div>
+    </Card>
 
-      <button onClick={deleteAll} style={{ marginBottom: "20px" }}>
+    <Card>
+      <button
+        onClick={deleteAll}
+        style={{
+          padding: "10px 16px",
+          borderRadius: "8px",
+          border: "none",
+          background: "#d9534f",
+          color: "white",
+          cursor: "pointer"
+        }}
+      >
         Delete All Memory
       </button>
+    </Card>
 
-      <ul>
+    <Card>
+      <ul style={{ listStyle: "none", padding: 0 }}>
         {memories.map((m) => (
-          <li key={m.id} style={{ marginBottom: "10px" }}>
+          <li
+            key={m.id}
+            style={{
+              padding: "12px",
+              borderBottom: "1px solid #eee",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center"
+            }}
+          >
             {editingId === m.id ? (
               <>
                 <input
                   value={editingText}
                   onChange={(e) => setEditingText(e.target.value)}
-                  style={{ width: "300px", padding: "8px" }}
+                  style={{
+                    flex: 1,
+                    padding: "8px",
+                    borderRadius: "8px",
+                    border: "1px solid #ccc",
+                    marginRight: "10px"
+                  }}
                 />
-                <button onClick={() => updateMemory(m.id)}>Save</button>
-                <button onClick={() => setEditingId(null)}>Cancel</button>
+                <button
+                  onClick={() => updateMemory(m.id)}
+                  style={{
+                    padding: "8px 12px",
+                    borderRadius: "8px",
+                    background: "#28a745",
+                    color: "white",
+                    border: "none",
+                    marginRight: "6px"
+                  }}
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => setEditingId(null)}
+                  style={{
+                    padding: "8px 12px",
+                    borderRadius: "8px",
+                    background: "#6c757d",
+                    color: "white",
+                    border: "none"
+                  }}
+                >
+                  Cancel
+                </button>
               </>
             ) : (
               <>
-                {m.fact}
-                <button
-                  onClick={() => {
-                    setEditingId(m.id);
-                    setEditingText(m.fact);
-                  }}
-                  style={{ marginLeft: "10px" }}
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => deleteMemory(m.id)}
-                  style={{ marginLeft: "10px" }}
-                >
-                  Delete
-                </button>
+                <span>{m.fact}</span>
+                <div style={{ display: "flex", gap: "8px" }}>
+                  <button
+                    onClick={() => {
+                      setEditingId(m.id);
+                      setEditingText(m.fact);
+                    }}
+                    style={{
+                      padding: "8px 12px",
+                      borderRadius: "8px",
+                      background: "#0067c0",
+                      color: "white",
+                      border: "none"
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => deleteMemory(m.id)}
+                    style={{
+                      padding: "8px 12px",
+                      borderRadius: "8px",
+                      background: "#d9534f",
+                      color: "white",
+                      border: "none"
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </>
             )}
           </li>
         ))}
       </ul>
-    </Layout>
-  );
+    </Card>
+  </Layout>
+);
+
 }
