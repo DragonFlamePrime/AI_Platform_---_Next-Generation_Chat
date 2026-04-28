@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { HomeIcon, MemoryIcon } from "../icons/Icons";
+import { applyTheme } from "../theme";
 
 export default function Sidebar() {
+  const handleThemeChange = (e) => {
+    applyTheme(e.target.value);
+  };
+
   return (
     <div
       style={{
@@ -54,6 +59,30 @@ export default function Sidebar() {
           Memory
         </Link>
       </nav>
+
+      <div style={{ marginTop: "40px" }}>
+        <h3 style={{ marginBottom: "10px", fontSize: "14px", opacity: 0.8 }}>
+          Appearance
+        </h3>
+
+        <select
+          onChange={handleThemeChange}
+          defaultValue={localStorage.getItem("theme") || "system"}
+          style={{
+            width: "100%",
+            padding: "10px",
+            borderRadius: "8px",
+            border: "1px solid var(--sidebar-border)",
+            background: "var(--card-bg)",
+            color: "var(--sidebar-text)",
+            outline: "none"
+          }}
+        >
+          <option value="system">System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
     </div>
   );
 }

@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App.jsx";
 import Memory from "./pages/Memory.jsx";
 import "./global.css";
+import { loadTheme } from "./theme";
+loadTheme();
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>

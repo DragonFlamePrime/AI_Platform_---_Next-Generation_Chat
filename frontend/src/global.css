@@ -1,8 +1,8 @@
 /* ============================
-   Copilot Global Theme System
+   Copilot Theme System
    ============================ */
 
-/* Light mode variables */
+/* Light mode (default) */
 :root {
   --bg: #f5f5f5;
   --text: #222;
@@ -24,18 +24,40 @@
   --shadow: rgba(0, 0, 0, 0.06);
 }
 
-/* Dark mode variables */
+/* Manual dark mode override */
+html[data-theme="dark"] {
+  --bg: #1e1e1e;
+  --text: #e6e6e6;
+
+  --card-bg: #2a2a2a;
+  --card-border: #3a3a3a;
+
+  --sidebar-bg: #2f2f2f;
+  --sidebar-border: #4a4a4a;
+  --sidebar-text: #f5f5f5;
+
+  --input-bg: #2a2a2a;
+  --input-border: #555;
+
+  --button-primary: #3ea0ff;
+  --button-danger: #ff6b6b;
+  --button-neutral: #888;
+
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* System dark mode (only applies when NOT manually overridden) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --bg: #1e1e1e;
     --text: #e6e6e6;
 
     --card-bg: #2a2a2a;
     --card-border: #3a3a3a;
 
-    --sidebar-bg: #2f2f2f;       /* higher contrast */
+    --sidebar-bg: #2f2f2f;
     --sidebar-border: #4a4a4a;
-    --sidebar-text: #f5f5f5;     /* bright text for visibility */
+    --sidebar-text: #f5f5f5;
 
     --input-bg: #2a2a2a;
     --input-border: #555;
