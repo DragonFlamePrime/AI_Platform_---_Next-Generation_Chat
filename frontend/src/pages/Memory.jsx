@@ -1,6 +1,7 @@
 import Layout from "../components/Layout";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
+import { AddIcon, TrashIcon, EditIcon, SaveIcon, CancelIcon } from "../icons/Icons";
 
 export default function Memory() {
   const [memories, setMemories] = useState([]);
@@ -68,14 +69,16 @@ export default function Memory() {
             onChange={(e) => setNewFact(e.target.value)}
             placeholder="Add a fact..."
           />
-          <button className="btn-primary" onClick={addMemory}>
+          <button className="btn-primary" onClick={addMemory} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+            <AddIcon />
             Add
           </button>
         </div>
       </Card>
 
       <Card>
-        <button className="btn-danger" onClick={deleteAll}>
+        <button className="btn-danger" onClick={deleteAll} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <TrashIcon />
           Delete All Memory
         </button>
       </Card>
@@ -98,21 +101,14 @@ export default function Memory() {
                   <input
                     value={editingText}
                     onChange={(e) => setEditingText(e.target.value)}
-                    style={{
-                      flex: 1,
-                      marginRight: "10px"
-                    }}
+                    style={{ flex: 1, marginRight: "10px" }}
                   />
-                  <button
-                    className="btn-primary"
-                    onClick={() => updateMemory(m.id)}
-                  >
+                  <button className="btn-primary" onClick={() => updateMemory(m.id)} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <SaveIcon />
                     Save
                   </button>
-                  <button
-                    className="btn-neutral"
-                    onClick={() => setEditingId(null)}
-                  >
+                  <button className="btn-neutral" onClick={() => setEditingId(null)} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <CancelIcon />
                     Cancel
                   </button>
                 </>
@@ -120,19 +116,12 @@ export default function Memory() {
                 <>
                   <span>{m.fact}</span>
                   <div style={{ display: "flex", gap: "8px" }}>
-                    <button
-                      className="btn-primary"
-                      onClick={() => {
-                        setEditingId(m.id);
-                        setEditingText(m.fact);
-                      }}
-                    >
+                    <button className="btn-primary" onClick={() => { setEditingId(m.id); setEditingText(m.fact); }} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                      <EditIcon />
                       Edit
                     </button>
-                    <button
-                      className="btn-danger"
-                      onClick={() => deleteMemory(m.id)}
-                    >
+                    <button className="btn-danger" onClick={() => deleteMemory(m.id)} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                      <TrashIcon />
                       Delete
                     </button>
                   </div>
