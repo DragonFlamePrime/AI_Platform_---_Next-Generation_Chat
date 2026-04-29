@@ -1,10 +1,33 @@
-import { Link } from "react-router-dom";
-import { HomeIcon, MemoryIcon } from "../icons/Icons";
-import { applyTheme } from "../theme";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { HomeIcon, MemoryIcon, NewConversationIcon } from "../icons/Icons";
 
 export default function Sidebar() {
-  const handleThemeChange = (e) => {
-    applyTheme(e.target.value);
+  const navigate = useNavigate();
+  const [conversations, setConversations] = useState([]);
+
+  // Load conversations from backend
+  useEffect(() => {
+    fetch("/api/conversations")
+      .then((res) => res.json())
+      .then((data) => {
+        // newest first
+        const sorted = data.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+        setConversations(sorted);
+      });
+  }, []);
+
+  // Create a new conversation
+  const createConversation = async () => {
+    const res = await fetch("/api/conversations", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" }
+    });
+
+    const convo = await res.json();
+    navigate(`/chat/${convo.id}`);
   };
 
   return (
@@ -20,68 +43,109 @@ export default function Sidebar() {
         left: 0,
         top: 0,
         boxSizing: "border-box",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
         transition: "background 0.25s ease, border-color 0.25s ease, color 0.25s ease",
         boxShadow: "2px 0 6px rgba(0,0,0,0.25)"
       }}
     >
-      <h2 style={{ marginBottom: "24px", fontWeight: 600 }}>Settings</h2>
+      {/* TOP SECTION */}
+      <div>
+        <h2 style={{ marginBottom: "24px", fontWeight: 600 }}>Settings</h2>
 
-      <nav style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-        <Link
-          to="/"
-          className="sidebar-link"
-          style={{
-            textDecoration: "none",
-            color: "var(--sidebar-text)",
-            fontSize: "15px",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px"
-          }}
-        >
-          <HomeIcon size={18} />
-          Home
-        </Link>
+        <nav style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+          <Link
+            to="/"
+            className="sidebar-link"
+            style={{
+              textDecoration: "none",
+              color: "var(--sidebar-text)",
+              fontSize: "15px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px"
+            }}
+          >
+            <HomeIcon size={18} />
+            Home
+          </Link>
 
-        <Link
-          to="/memory"
-          className="sidebar-link"
-          style={{
-            textDecoration: "none",
-            color: "var(--sidebar-text)",
-            fontSize: "15px",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px"
-          }}
-        >
-          <MemoryIcon size={18} />
-          Memory
-        </Link>
-      </nav>
+          {/* NEW CONVERSATION BUTTON */}
+          <button
+            onClick={createConversation}
+            className="sidebar-link"
+            style={{
+              background: "transparent",
+              border: "none",
+              padding: "0",
+              margin: "0",
+              cursor: "pointer",
+              color: "var(--sidebar-text)",
+              fontSize: "15px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px"
+            }}
+          >
+            <NewConversationIcon size={18} />
+            New Conversation
+          </button>
 
-      <div style={{ marginTop: "40px" }}>
-        <h3 style={{ marginBottom: "10px", fontSize: "14px", opacity: 0.8 }}>
-          Appearance
-        </h3>
+          <Link
+            to="/memory"
+            className="sidebar-link"
+            style={{
+              textDecoration: "none",
+              color: "var(--sidebar-text)",
+              fontSize: "15px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px"
+            }}
+          >
+            <MemoryIcon size={18} />
+            Memory
+          </Link>
+        </nav>
+      </div>
 
-        <select
-          onChange={handleThemeChange}
-          defaultValue={localStorage.getItem("theme") || "system"}
-          style={{
-            width: "100%",
-            padding: "10px",
-            borderRadius: "8px",
-            border: "1px solid var(--sidebar-border)",
-            background: "var(--card-bg)",
-            color: "var(--sidebar-text)",
-            outline: "none"
-          }}
-        >
-          <option value="system">System</option>
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-        </select>
+      {/* BOTTOM SECTION — CONVERSATION LIST */}
+      <div
+        style={{
+          marginTop: "20px",
+          overflowY: "auto",
+          maxHeight: "200px", // shows ~2 items before scrolling
+          paddingRight: "6px"
+        }}
+      >
+        {conversations.map((c) => (
+          <div
+            key={c.id}
+            onClick={() => navigate(`/chat/${c.id}`)}
+            className="sidebar-link"
+            style={{
+              cursor: "pointer",
+              padding: "6px 8px",
+              borderRadius: "6px",
+              marginBottom: "6px",
+              color: "var(--sidebar-text)"
+            }}
+          >
+            {c.title || "Untitled Conversation"}
+          </div>
+        ))}
+      </div>
+
+      {/* PROFILE SECTION */}
+      <div
+        style={{
+          marginTop: "20px",
+          opacity: 0.7,
+          fontSize: "14px"
+        }}
+      >
+        Account
       </div>
     </div>
   );
