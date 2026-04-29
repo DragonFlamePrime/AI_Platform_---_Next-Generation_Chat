@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { HomeIcon, MemoryIcon, NewConversationIcon } from "../icons/Icons";
+import { HomeIcon, MemoryIcon, NewConversationIcon, AppearanceIcon } from "../icons/Icons";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -106,6 +106,22 @@ export default function Sidebar() {
           >
             <MemoryIcon size={18} />
             Memory
+          </Link>
+
+          <Link
+            to="/appearance"
+            className="sidebar-link"
+            style={{
+              textDecoration: "none",
+              color: "var(--sidebar-text)",
+              fontSize: "15px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px"
+            }}
+          >
+            <AppearanceIcon size={18} />
+            Appearance
           </Link>
         </nav>
       </div>
