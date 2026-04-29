@@ -7,13 +7,13 @@ import Appearance from "./pages/Appearance";
 
 export default function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/memory" element={<Memory />} />
-        <Route path="/chat/:id" element={<Chat />} />
-        <Route path="/appearance" element={<Appearance />} />
-      </Routes>
-    </Layout>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="memory" element={<Memory />} />
+        <Route path="chat/:id" element={<Chat />} />
+        <Route path="appearance" element={<Appearance />} />
+      </Route>
+    </Routes>
   );
 }

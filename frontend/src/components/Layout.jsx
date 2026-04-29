@@ -1,6 +1,7 @@
+import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
-export default function Layout({ children }) {
+export default function Layout() {
   return (
     <div style={{ display: "flex" }}>
       <Sidebar />
@@ -14,7 +15,7 @@ export default function Layout({ children }) {
           transition: "background 0.25s ease, color 0.25s ease"
         }}
       >
-        {children}
+        <Outlet />
       </div>
     </div>
   );

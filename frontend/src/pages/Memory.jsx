@@ -58,79 +58,80 @@ export default function Memory() {
     loadMemories();
   };
 
-  return (
-    <Layout>
-      <h1 style={{ marginBottom: "20px" }}>Facts You've Shared</h1>
+return (
+  <>
+    <h1 style={{ marginBottom: "20px" }}>Facts You've Shared</h1>
 
-      <Card>
-        <div style={{ display: "flex", gap: "10px" }}>
-          <input
-            value={newFact}
-            onChange={(e) => setNewFact(e.target.value)}
-            placeholder="Add a fact..."
-          />
-          <button className="btn-primary" onClick={addMemory} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <AddIcon />
-            Add
-          </button>
-        </div>
-      </Card>
-
-      <Card>
-        <button className="btn-danger" onClick={deleteAll} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-          <TrashIcon />
-          Delete All Memory
+    <Card>
+      <div style={{ display: "flex", gap: "10px" }}>
+        <input
+          value={newFact}
+          onChange={(e) => setNewFact(e.target.value)}
+          placeholder="Add a fact..."
+        />
+        <button className="btn-primary" onClick={addMemory} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <AddIcon />
+          Add
         </button>
-      </Card>
+      </div>
+    </Card>
 
-      <Card>
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          {memories.map((m) => (
-            <li
-              key={m.id}
-              style={{
-                padding: "12px",
-                borderBottom: "1px solid #eee",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center"
-              }}
-            >
-              {editingId === m.id ? (
-                <>
-                  <input
-                    value={editingText}
-                    onChange={(e) => setEditingText(e.target.value)}
-                    style={{ flex: 1, marginRight: "10px" }}
-                  />
-                  <button className="btn-primary" onClick={() => updateMemory(m.id)} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                    <SaveIcon />
-                    Save
+    <Card>
+      <button className="btn-danger" onClick={deleteAll} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+        <TrashIcon />
+        Delete All Memory
+      </button>
+    </Card>
+
+    <Card>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {memories.map((m) => (
+          <li
+            key={m.id}
+            style={{
+              padding: "12px",
+              borderBottom: "1px solid #eee",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center"
+            }}
+          >
+            {editingId === m.id ? (
+              <>
+                <input
+                  value={editingText}
+                  onChange={(e) => setEditingText(e.target.value)}
+                  style={{ flex: 1, marginRight: "10px" }}
+                />
+                <button className="btn-primary" onClick={() => updateMemory(m.id)} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <SaveIcon />
+                  Save
+                </button>
+                <button className="btn-neutral" onClick={() => setEditingId(null)} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <CancelIcon />
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <>
+                <span>{m.fact}</span>
+                <div style={{ display: "flex", gap: "8px" }}>
+                  <button className="btn-primary" onClick={() => { setEditingId(m.id); setEditingText(m.fact); }} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <EditIcon />
+                    Edit
                   </button>
-                  <button className="btn-neutral" onClick={() => setEditingId(null)} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                    <CancelIcon />
-                    Cancel
+                  <button className="btn-danger" onClick={() => deleteMemory(m.id)} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <TrashIcon />
+                    Delete
                   </button>
-                </>
-              ) : (
-                <>
-                  <span>{m.fact}</span>
-                  <div style={{ display: "flex", gap: "8px" }}>
-                    <button className="btn-primary" onClick={() => { setEditingId(m.id); setEditingText(m.fact); }} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                      <EditIcon />
-                      Edit
-                    </button>
-                    <button className="btn-danger" onClick={() => deleteMemory(m.id)} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                      <TrashIcon />
-                      Delete
-                    </button>
-                  </div>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
-      </Card>
-    </Layout>
-  );
+                </div>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    </Card>
+  </>
+);
+
 }
