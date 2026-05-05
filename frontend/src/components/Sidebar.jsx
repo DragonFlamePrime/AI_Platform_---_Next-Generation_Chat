@@ -127,14 +127,15 @@ export default function Sidebar() {
       </div>
 
       {/* BOTTOM SECTION — CONVERSATION LIST */}
-      <div
-        style={{
-          marginTop: "20px",
-          overflowY: "auto",
-          maxHeight: "200px", // shows ~2 items before scrolling
-          paddingRight: "6px"
-        }}
-      >
+<div
+  style={{
+    marginTop: "20px",
+    overflowY: "auto",
+    maxHeight: "90px", // fits ~2 items
+    paddingRight: "6px"
+  }}
+>
+
         {conversations.map((c) => (
           <div
             key={c.id}
